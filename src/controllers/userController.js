@@ -66,7 +66,8 @@ export const userLogin = async (req, res) => {
 
    const options={
     httpOnly:true,
-    secure:true
+    secure:false,
+    sameSite:'None'
    }
    console.log(iscreator);
     return res.status(200).cookie("accessToken", token,options).json({ success: true, user,iscreator });
