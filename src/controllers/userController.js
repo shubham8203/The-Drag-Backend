@@ -66,7 +66,7 @@ export const userLogin = async (req, res) => {
 
    const options={
     httpOnly:true,
-    secure:false,
+    secure:true,
     sameSite:'None'
    }
    console.log(iscreator);
