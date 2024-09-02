@@ -274,6 +274,7 @@ export const handleCreatorEdit = async (req, res) => {
    
    const exist=await Creator.findOne({email:data.email});
   
+   try{
    const new_creator=await Creator.findOneAndUpdate({email:data.email},{
       type:(type!='')?type:exist.type,
       userName:(userName!='')?userName:exist.userName,
@@ -305,8 +306,11 @@ export const handleCreatorEdit = async (req, res) => {
 
    },{new:true});
    console.log(new_creator);
-   return res.status(200).json({message:'Creator Data updated Successfully'});
-    
+   return res.status(200).json({success:true,message:'Creator Data updated Successfully'});
+  }
+  catch(error){
+    return res.json({success:false,message:"an Error Occured"});
+  }
 
 }
 export const handleContact=async(req,res)=>{
