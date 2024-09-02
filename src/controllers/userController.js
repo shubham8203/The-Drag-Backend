@@ -141,7 +141,7 @@ export const getalldata = async (req, res) => {
   return res.status(200).json({ data: data });
 }
 export const logout = (req, res) => {
-  if (req.cookies["accessToken"]) {
+  if (req.cookies&&req.cookies["accessToken"]) {
 
     return res.clearCookie('accessToken').json({ message: "You are logged out" });
 
