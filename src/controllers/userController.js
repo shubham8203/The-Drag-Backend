@@ -67,7 +67,10 @@ export const userLogin = async (req, res) => {
    const options={
     httpOnly:true,
     secure:true,
-    sameSite:'None'
+    sameSite:'None',
+    domain:'http://localhost:5000/',
+    maxAge:7*24*60*60*1000,
+
    }
    console.log(iscreator);
     return res.status(200).cookie("accessToken", token,options).json({ success: true, user,iscreator });
