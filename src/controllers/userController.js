@@ -268,13 +268,13 @@ export const handleCreatorEdit = async (req, res) => {
   }
 
 
- 
+  try{
    const token=req.cookies["accessToken"];
    const data=jwt.verify(token,process.env.SECRET_KEY);
    
    const exist=await Creator.findOne({email:data.email});
   
-   try{
+   
    const new_creator=await Creator.findOneAndUpdate({email:data.email},{
       type:(type!='')?type:exist.type,
       userName:(userName!='')?userName:exist.userName,
@@ -309,7 +309,7 @@ export const handleCreatorEdit = async (req, res) => {
    return res.status(200).json({success:true,message:'Creator Data updated Successfully'});
   }
   catch(error){
-    return res.json({success:false,message:"an Error Occured"});
+    return res.json({success:false,message:error});
   }
 
 }
