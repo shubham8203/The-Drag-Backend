@@ -63,8 +63,13 @@ export const userLogin = async (req, res) => {
     iscreator=false;
    }
    else iscreator=true;
+
+   const options={
+    httpOnly:true,
+    secure:true
+   }
    console.log(iscreator);
-    return res.status(200).cookie("accessToken", token).json({ success: true, user,iscreator });
+    return res.status(200).cookie("accessToken", token,options).json({ success: true, user,iscreator });
 
   } catch (error) {
 
