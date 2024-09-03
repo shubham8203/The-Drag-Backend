@@ -9,11 +9,11 @@ import nodemailer from 'nodemailer'
 dotenv.config();
 
 export const createUser = async (req, res) => {
-  try {
+  
     const { name, email, password } = req.body;
 
     if (!name || !email || !password) return res.status(403).json({ error: "Incomplete fields", success: false });
-    const existingUser = await User.find({ name });
+    const existingUser = await User.find({ email });
 
     if (existingUser.length > 0) {
       return res.status(403).json({ success: false, error: "User with same UserName already exists" });
@@ -39,9 +39,7 @@ export const createUser = async (req, res) => {
       iscreator:false,
     }
     );
-  } catch (error) {
-    return res.status(500).json({ success: false, error: error });
-  }
+  
 }
 
 export const userLogin = async (req, res) => {
@@ -53,6 +51,7 @@ export const userLogin = async (req, res) => {
     const user = await User.findOne({ email, password });
     if (!user) return res.status(404).json({ success: false, error: "User not found! Go to Signup Page" });
     const data = {
+      name:user.name,
       email: email,
     }
     const token = jwt.sign(data, process.env.SECRET_KEY);
