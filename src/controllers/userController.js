@@ -66,7 +66,7 @@ export const userLogin = async (req, res) => {
    const options={
     httpOnly:true,
     secure:true,
-    sameSite:'None',
+    sameSite:'strict',
     maxAge:7*24*60*60*1000,
 
    }
@@ -150,7 +150,7 @@ export const getalldata = async (req, res) => {
 export const logout = (req, res) => {
   if (req.cookies&&req.cookies["accessToken"]) {
       console.log(req.cookies["accessToken"]);
-    return res.clearCookie("accessToken",{httpOnly:true,secure:true,sameSite:'None'}).json({ message: "You are logged out" });
+    return res.clearCookie("accessToken").json({ message: "You are logged out" });
 
   }
   return res.json({ message: "you are already logged out" });
