@@ -15,7 +15,7 @@ router.route('/login').post(userLogin);
 router.route('/signup').post(createUser);
 router.route('/register').post(upload.single('profileImage'),handleCreatorRegister);
 router.route('/').get(getalldata);
-router.route('/logout').get(logout);
+router.route('/logout').post(logout);
 router.route('/search').post(handlesearch);
 router.route('/filter').post(filter);
 router.route('/edit').post(upload.single('profileImage'),handleCreatorEdit);

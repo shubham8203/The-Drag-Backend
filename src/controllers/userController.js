@@ -97,7 +97,7 @@ Profile Image, Location,Type and User Name are required`})
   const user = await User.findOne({ email: data.email });
   const existing=await Creator.findOne({email:data.email});
 
-  if(existing!=null){
+  if(existing!={}){
     return res.json({success:false,error:"User Already Registered !"});
   }
   const creator = await Creator.create({
