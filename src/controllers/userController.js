@@ -10,10 +10,10 @@ dotenv.config();
 
 export const createUser = async (req, res) => {
   try {
-    const { userName, email, password } = req.body;
+    const { name, email, password } = req.body;
 
-    if (!userName || !email || !password) return res.status(403).json({ error: "Incomplete fields", success: false });
-    const existingUser = await User.find({ userName });
+    if (!name || !email || !password) return res.status(403).json({ error: "Incomplete fields", success: false });
+    const existingUser = await User.find({ name });
 
     if (existingUser.length > 0) {
       return res.status(403).json({ success: false, error: "User with same UserName already exists" });
@@ -21,12 +21,12 @@ export const createUser = async (req, res) => {
 
     const newUser = await User.create({
 
-      userName: userName,
+      name: name,
       email: email,
       password: password
     })
     const data = {
-      userName,
+      name,
       email
     }
     console.log(newUser);
@@ -66,9 +66,8 @@ export const userLogin = async (req, res) => {
 
    const options={
     httpOnly:true,
-    secure:true,
+    secure:false,
     sameSite:'None',
-    domain:'http://localhost:5000/',
     maxAge:7*24*60*60*1000,
 
    }
