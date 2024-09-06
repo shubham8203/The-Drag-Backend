@@ -71,7 +71,14 @@ export const userLogin = async (req, res) => {
 
    }
    console.log(iscreator);
-    return res.status(200).cookie("accessToken", token,options).json({ success: true, user,iscreator });
+    return res
+    .status(200)
+    .cookie("accessToken", token,options)
+    .json({ 
+      success: true,
+      user,
+      iscreator 
+    });
 
   } catch (error) {
 
