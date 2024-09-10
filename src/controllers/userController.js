@@ -46,10 +46,10 @@ export const userLogin = async (req, res) => {
   try {
 
     const { email, password } = req.body;
-    if (!email || !password) return res.status(403).json({ success: false, error: "Complete the fields" });
+    if (!email || !password) return res.status(403).json({ success: false, error: "Complete all the fields" });
 
     const user = await User.findOne({ email, password });
-    if (!user) return res.status(404).json({ success: false, error: "User not found! Go to Signup Page" });
+    if (!user) return res.status(404).json({ success: false, error: "User not found! Go to Signup " });
     const data = {
       name:user.name,
       email: email,
@@ -64,10 +64,11 @@ export const userLogin = async (req, res) => {
    else iscreator=true;
 
    const options={
-    httpOnly:false,
+    httpOnly:true,
     secure:true,
-    sameSite:'None',
+  
     maxAge:7*24*60*60*1000,
+    sameSite:'None'
 
    }
    console.log(iscreator);
@@ -104,7 +105,7 @@ Profile Image, Location,Type and User Name are required`})
   const user = await User.findOne({ email: data.email });
   const existing=await Creator.findOne({email:data.email});
 
-  if(existing!={}){
+  if(existing!=null){
     return res.json({success:false,error:"User Already Registered !"});
   }
   const creator = await Creator.create({
@@ -139,16 +140,8 @@ Profile Image, Location,Type and User Name are required`})
     image: image_url
 
   })
- 
 
-
-
-
-
-  return res.json({ success: true });
-
-
-
+  return res.json({ success: true});
 }
 export const getalldata = async (req, res) => {
   const data = await Creator.find({});
