@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use(express.urlencoded({extended:false}));
 app.use(cors({
-    origin:'https://the-drag-frontend-ruddy.vercel.app/',
+    origin:'https://the-drag-frontend-ruddy.vercel.app',
     credentials:true,
         
 
